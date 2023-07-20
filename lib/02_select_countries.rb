@@ -52,6 +52,12 @@ def population_in_millions
   # 'South America'. Divide the population by 1,000,000 to get population in
   # millions.
   execute(<<-SQL)
+    SELECT 
+      name, population/1000000
+    FROM
+      countries
+    WHERE
+      continent IN ('South America')
   SQL
 end
 
