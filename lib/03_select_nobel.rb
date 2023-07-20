@@ -73,6 +73,12 @@ def eighties_literature
   # Show all details (yr, subject, winner) of the Literature prize winners
   # for 1980 to 1989 inclusive.
   execute(<<-SQL)
+    SELECT 
+      yr, subject, winner
+    FROM 
+      nobels
+    WHERE
+      subject IN ('Literature') AND yr BETWEEN 1980 AND 1989
   SQL
 end
 
@@ -80,11 +86,23 @@ def presidential_prizes
   # Show all details of the presidential winners: ('Theodore Roosevelt',
   # 'Woodrow Wilson', 'Jimmy Carter')
   execute(<<-SQL)
+    SELECT 
+      yr, subject, winner 
+    FROM 
+      nobels
+    WHERE
+      winner IN ('Theodore Roosevelt', 'Woodrow Wilson', 'Jimmy Carter')
   SQL
 end
 
 def nobel_johns
   # Show the winners with first name John
   execute(<<-SQL)
+    SELECT 
+      winner
+    FROM 
+      nobels
+    WHERE
+      winner LIKE ('John%')
   SQL
 end
