@@ -38,7 +38,16 @@ def larger_than_russia
     SELECT 
       name
     FROM
-      countries 
+      countries
+    WHERE 
+      population > (
+        SELECT 
+          population
+        FROM
+          countries
+        WHERE 
+          name = 'Russia'
+      )
   SQL
 end
 
