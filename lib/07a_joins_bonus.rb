@@ -34,13 +34,21 @@ def alison_artist
       tracks ON albums.asin = tracks.album
     WHERE
       song = 'Alison'
-      
+
   SQL
 end
 
 def exodus_artist
   # Select the name of the artist who recorded the song 'Exodus'.
   execute(<<-SQL)
+    SELECT
+      artist
+    FROM
+      albums
+    JOIN
+      tracks ON albums.asin = tracks.album
+    WHERE
+      song = 'Exodus'
   SQL
 end
 
