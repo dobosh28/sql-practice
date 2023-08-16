@@ -120,7 +120,7 @@ def song_title_counts
   # COUNT of times they show up.
   execute(<<-SQL)
     SELECT
-      song, COUNT(song)
+      title, COUNT(song)
     FROM
       tracks
     GROUP BY
@@ -198,5 +198,24 @@ def expensive_tastes
   # subquery. Next, JOIN the styles table to this result and use aggregates to
   # determine the average price per track.
   execute(<<-SQL)
+    SELECT
+      style, SUM(price)/SUM(track_count)
+    FROM
+      styles
+    JOIN
+      (SELECT
+        album, COUNT(song) AS track_count
+      FROM
+        tracks
+      GROUP BY
+        album) AS track_counts ON styles.album = track_counts.album
+    JOIN
+      albums ON styles.album = albums.asin
+    GROUP BY
+      style
+    ORDER BY
+      SUM(price)/SUM(track_count) DESC
+    LIMIT
+      5
   SQL
 end
