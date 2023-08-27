@@ -128,5 +128,14 @@ def teachers_and_divisions_two
   # the teacher is in dept 1 or 2, 'Art' if the dept is 3, and
   # 'None' otherwise.
   execute(<<-SQL)
+    SELECT 
+      name, 
+      CASE
+        WHEN dept_id = 1 OR dept_id = 2 THEN 'Sci'
+        WHEN dept_id = 3 THEN 'Art'
+        ELSE 'None'
+      END
+    FROM
+      teachers
   SQL
 end
